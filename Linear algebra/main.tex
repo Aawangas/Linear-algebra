@@ -1,0 +1,59 @@
+%ESTA JODA TIENE COPYRIGHT, NO ROBAR DE FORMA DESCARADA PLS att: mmanosalva%
+\documentclass[12pt,a4paper]{book} 
+\input{Configs/Configs}
+
+\begin{document}
+\renewcommand{\contentsname}{\vspace{0cm} Content \vspace{-2cm}}
+
+\begin{titlepage}
+\vspace*{2cm}
+
+\noindent
+\vspace*{0.5cm}
+\titlefont{Linear Algebra}
+
+\vspace{1.5cm}
+\epigraph{How does it develop and why do we study this?}%
+{ \textsc{WANG, Anbang}}
+\null\vfill
+\vspace*{1cm}
+\noindent
+\hfill
+\begin{minipage}{0.7\linewidth}
+    \begin{flushright}
+        \printauthor %CHANGE THE AUTHORS IN FORMAT.TEX%
+    \end{flushright}
+\end{minipage}
+%
+\begin{minipage}{0.02\linewidth}
+    \rule{1pt}{70pt}
+\end{minipage}
+\titlepagedecoration
+\end{titlepage}
+
+\let\cleardoublepage=\clearpage
+\input{Chapters/Preface}
+\tableofcontents
+
+
+
+\chapter{Vector Space}
+\input{Chapters/VectorSpace}
+\chapter{linear transformation}
+\input{Chapters/LinearTransformation}
+%\chapter{Solving matrices}
+%\input{Chapters/SolveMatrix}
+
+%\newpage\thispagestyle{empty}\blankpage
+%\chapter{Examples II}
+%\input{Chapters/2}
+
+
+
+\bibliographystyle{unsrt}
+%\bibliography{references}
+\nocite{*}
+
+
+
+\end{document}

@@ -1,0 +1,208 @@
+\newcommand{\x}{\mathbf{x}}
+\renewcommand{\v}{\mathbf{v}}
+\newcommand{\w}{\mathbf{w}}
+
+\section{Function and linear transformation}
+
+If you ask me, what's linear algebra studying for? My answer would be: it studies the property of linear transformation. We begin with the more general version: a function.
+
+\begin{definition}
+    For given two set $V$ and $W$, if 
+    $\forall \mathbf{v} \in V, ! \exists \mathbf{w} \in W$ corresponding to it, we define the correspondence (also called mapping) as a function from $V$ to $W$.
+\end{definition}
+
+\begin{eg}
+    $f(x) = x+1, \mathbf{R} \to \mathbf{R}$\\
+\end{eg}
+\begin{eg}
+    $\frac{d}{dx} f(x) = f'(x), \mathbf{C^{\infty}} \to \mathbf{C^{\infty}}$, where $C^{\infty}$ mean the infinitely times differentiable functions.\\
+\end{eg}
+
+The second example might seems a little weird, it's a function that takes in a function and returns a function. But, checking the definition, the differentiation function is well-defined, since a differentiable function can have only one derivative.\\
+
+In case of linear algebra, we usually focus on one specific type of function, or we call transformation. And the linear transformation is defined as following:
+\begin{definition}
+    if $T$ is a function that mapping from $V$ to $W$,
+    $T:\ V \to W$, and $$\forall \v_1,\v_2 \in V, \forall c \in \mathcal{F}, T(\v_1)+cT(\v_2) = T(\v_1+c\v_2)$$
+    We say that $T$ is a linear transformation.
+\end{definition}
+Here, the $\mathcal{F}$ is a field set, but we can simply consider it as a ``factor", in this notes, the set can be $\mathbf{R}$ or $\mathbf{C}$, the real numbers or complex numbers.\\
+
+This definition seems good enough, and enough intuitive, but something bad might happen if $\v_1+c\v_2 \notin V$, then $T$ is not a well defined function. Then we have the definition of vector space, which ensures the inner operation will not ``get out of range''. 
+
+\section{Vector space}
+
+\begin{definition}
+    A vector space over a field $\mathcal{F}$ is a set that 
+    $$\forall \v_1,\v_2 \in V, \forall c \in \mathcal{F}, \v_1+c\v_2 \in V$$
+\end{definition}
+
+One direct consequence is that the unique zero vector must exist in the vector space. We can show that by taking $\v_1 = \v_2, c = -1$.\\
+
+Following are examples of vector spaces:
+\begin{eg}
+    The zero vector space $\{ \mathbf{0} \}$.
+\end{eg}
+\begin{eg}
+    Euclidean space, $\mathbf{R}^n$, which is a n-tuple consisting of n real numbers. With element-wise adding and scaling. (When we say scaling, we mean multiply the original vector by a number).
+\end{eg}
+
+We usually write the Eucliden vector in this way:
+
+$$\v = 
+\begin{pmatrix}
+    c_1\\
+    c_2\\
+    \vdots\\
+    c_n
+\end{pmatrix} \in \mathbf{R}^n$$
+
+\begin{eg}
+    The set \{$\begin{pmatrix}
+        x\\
+        y\\
+        z
+    \end{pmatrix}:x+y+z = 0\} \subset \mathbf{R}^3$
+\end{eg}
+
+\begin{eg}
+    All continuous functions defined on $\mathbf{R}$.
+\end{eg}
+This is a counter example of vector space.
+\begin{ceg}
+    he set \{$\begin{pmatrix}
+        x\\
+        y\\
+        z
+    \end{pmatrix}:x+y+z = 1\} \subset \mathbf{R}^3$
+\end{ceg}
+
+Now that we have a special set for linear transformation. Next the question is, how do we describe the transformation? Since a non-zero vector space has infinitely many vectors, it seems foolish to express them one by one. Our goal is now try to find a way to use less vectors to represent the transformation, in the best case, using finitely many vectors. To do this, we must dig deeper into some properties of vector space.
+
+\section{Subspace and Span}
+Consider a plane in a 3-D space, say the set \{$\begin{pmatrix}
+        x\\
+        y\\
+        z
+    \end{pmatrix}:x+y+z = 0\} \subset \mathbf{R}^3$
+We also notice that this set itself is also a vector space. Then we call the set a subspace.
+\begin{definition}
+    Subspace is a subset of a vector space, which itself is also a vector space.
+\end{definition}
+Subspace is a good thing. It uses several unordered vector and fill the whole area making it ``symmetric'' and closed. It will later be used for decomposing the vector space, but we can leave it later.\\
+
+Since subspace is a good thing, we want to find a way to generate a subspace using an arbitrary set of vectors. That's when ``spanning set'' comes in.
+
+\begin{definition}
+    Let $\mathcal{S}$ be a subset of a vector space $V$.
+    1.A linear combination of $\mathcal{S}$ is any finite sum of the form:
+    $$c_1\v_1+c_2\v_2+\cdots+c_n\v_n \in V$$
+    2.We define the spanning set of $\mathcal{S}$ be the set of all linear combination of $\mathcal{S}$, denoted by $Span(\mathcal{{S}})$
+\end{definition}
+
+Then in the beginning example, we take $\v_1 = \begin{pmatrix}
+    1\\
+    -1\\
+    0
+\end{pmatrix}, \v_2 = \begin{pmatrix}
+    1\\
+    0\\
+    -1
+\end{pmatrix}$, then $Span(\{\v_1,\v_2\}) = \{\begin{pmatrix}
+        x\\
+        y\\
+        z
+    \end{pmatrix}:x+y+z = 0\} \subset \mathbf{R}^3$\}
+
+Directly following from definition, a spanning set MUST be a subspace of the original vector space.
+
+\section{Linear independence}
+We still use the above example, but this time we use two different vectors. 
+$\v_1 = \begin{pmatrix}
+    1\\
+    -1\\
+    0
+\end{pmatrix},\v_2 = \begin{pmatrix}
+    2\\
+    -2\\
+    0
+\end{pmatrix}$, and we now get a different spanning set:\{$\begin{pmatrix}
+    x\\
+    y\\
+    0
+\end{pmatrix},x+y = 0$\}. Now we wonder, what have led to the different?\\
+In second example, $\v_2 = 2\v_1$, then a linear combination of the two vector is $c_1\v_1 + c_2\v_2 = (c_1+2c_2)v_1$, only one vecor left! In this case, we say $\v_1,\v_2$ are linearly dependent. Formally,\\
+\begin{definition}
+    A set of vectors $\{\v_1,\v_2,\cdots,\v_n\}$ is linearly dependent if for some $c_i \neq 0$, $\sum_{k = 1}^n c_k\v_k = 0$
+\end{definition}
+In this case, we can divide $c_i$ at each of the vectors and represent $\v_i$ by other vectors.\\
+For the contrary case,
+\begin{definition}
+    A set of vectors $\{\v_1,\v_2,\cdots,\v_n\}$ is linearly independent if $\sum_{k = 1}^n c_k\v_k = 0$ implies $c_i = 0 ,\forall i$
+\end{definition}
+
+\section{Basis}
+We have almost get our wanted results! Remember:
+\begin{quote}
+    Our goal is now try to find a way to use less vectors to represent the transformation, in the best case, using finitely many vectors.
+\end{quote}
+Consider this, if all vectors in $V$ is a linear combination of a set of vectors in $V$, then the given result of linear transformation of the original vector is the linear combination of mappings of vectors in $V$. Formally,
+$$T(\v) = \sum_{k = 1}^n c_kT(\v_k)$$. 
+All we need to do now is to find that set of vectors. We can use the following algorithm.
+
+\begin{verbatim}
+    set = EmptySet;
+    while(We can find a vector not in Span(set))
+        add the vector to set;
+    return set;
+\end{verbatim}
+
+\begin{note}
+    For some vector spaces, we can never find a finite set of vector that span the whole space, but we may first not discuss about that.
+\end{note}
+For the vector space that can be spanned by finitely many vectors (in short finitely dimensional space), the set of vectors that spans the whole set must exists. In this case, we want a more ideal set. We hence introduce the concept of basis.
+
+\begin{definition}
+    A set of vectors $\mathcal{B}$ $\subset V$ is a basis of $V$ if it satisfies
+    \begin{enumerate}
+        \item $\mathcal{B}$ is a linearly independent set.
+        \item Span($\mathcal{B}$) = $V$.
+    \end{enumerate}
+\end{definition}
+
+We can understand the role of a basis as a smallest spanning set, and also the largest linear independent set. This will give us a quite beautiful result. We call it Unique Representation theorem.
+
+\begin{theorem}
+     If $\mathcal{B} = \{\v_1,\v_2,\cdots,\v_n\}$ is a basis of $V$, then for all $\v \in V$, there exists unique scalars $c_i$ such that $$\v = \sum_{k = 1}^n c_kv_k$$
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}
+        \item Existence is trivial by Definition 1.5 and Definition 1.8.
+        \item Uniqueness: We assume we have two different way of decomposition, subtracting on both sides, we have $$(c_1-c_1')\v_1+(c_2-c_2')\v_2+\cdots+(c_n-c_n')\v_n$$
+        Since $\mathcal{B}$ is linear independent, all factors are $0$.
+    \end{enumerate}
+\end{proof}
+
+If you are someone who care very much about mathematical rigorousness, we have two jobs left, One is to show the existence of such basis. One is to show the number of vectors in a basis is the same. I will assume we have proven this part and if you are really interested, you can look up Spanning Set theorem and Steinitz Exchange lemma, proofs can be found online.
+
+Combining the information that all the basis has the same number of vectors. It becomes natural for us to give a name for the ``number''.
+\begin{definition}
+    The dimension of a vector space is the number of vectors in a basis of the vector space.
+\end{definition}
+
+We have the criterion for basis:
+\begin{theorem}
+    Let $V$ be a n-dimensional vector space, let $\mathcal{S}\subset V$ be a set with n numbers.Then,
+    \begin{enumerate}
+        \item If $\mathcal{S}$ is linearly independent, $\mathcal{S}$ is a basis.
+        \item If Span($\mathcal{S}$) = $V$, $\mathcal{S}$ is a basis.
+    \end{enumerate}
+\end{theorem}
+
+\section{Summary}
+Following is a summary of what we have done in this chapter:
+\begin{enumerate}
+    \item We guarantee we don't have to check whether the $T(\v_1 + c\v_2)$ is well-defined because all vector space is closed in adding and scaling.
+    \item We show all finitely dimensional vector space can be decomposed into an unique sum of basis vectors.
+\end{enumerate}
+Yeah, That mainly what we did. Next chapter is of more fun. We will finally introduce the concept of matrix!
